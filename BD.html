@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mugisha Message Encoder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f7f8fc, #e2e6ef);
+      color: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 25px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 650px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      transition: 0.3s ease;
+    }
+
+    .container:hover {
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 30px;
+      font-weight: 600;
+      color: #3a3a3a;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 18px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      resize: none;
+      background-color: #f9f9f9;
+      color: #333;
+      transition: border-color 0.2s ease;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #6a82fb;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Mugisha Message Encoder</h1>
+    <textarea id="inputText" placeholder="Andika cyangwa shyiramo message..." oninput="autoConvert()"></textarea>
+    <textarea id="outputText" placeholder="Inyandiko yahinduwe izahagaragara hano..." readonly></textarea>
+    <footer>&copy; 2025 Mugisha Emmanuel</footer>
+  </div>
+
+  <script>
+    function rot13(str) {
+      return str.replace(/[a-zA-Z]/g, function (c) {
+        const base = c <= 'Z' ? 65 : 97;
+        return String.fromCharCode(((c.charCodeAt(0) - base + 13) % 26) + base);
+      });
+    }
+
+    function autoConvert() {
+      const input = document.getElementById("inputText").value;
+      if (input.trim() === "") {
+        document.getElementById("outputText").value = "";
+        return;
+      }
+      const converted = rot13(input);
+      document.getElementById("outputText").value = converted;
+    }
+  </script>
+</body>
+</html>
